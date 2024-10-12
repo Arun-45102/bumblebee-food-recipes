@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card mt-8">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let recipeItem of recipeItems.results">
+                <td>
+                  {{ recipeItem.id }}
+                </td>
+                <td>
+                  <a
+                    [routerLink]="['recipedetails', recipeItem.id]"
+                    class="mb-0 text-dark"
+                  >
+                    {{ recipeItem.title }}
+                  </a>
+                </td>
+                <td>
+                  <img
+                    src="{{ recipeItem.image }}"
+                    alt="{{ recipeItem.title }}"
+                    width="50"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

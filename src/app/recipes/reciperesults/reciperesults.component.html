@@ -1,0 +1,18 @@
+<div class="mb-4 mt-2">
+  <div
+    class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3 p-2"
+    *ngFor="let results of searchResults.results"
+  >
+    <img
+      class="w-5 me-3 mb-0"
+      src="{{ results.image }}"
+      alt="{{ results.title }}"
+    />
+    <a [routerLink]="['recipedetails', results.id]" class="mb-0 text-dark">
+      {{ results.title }}
+    </a>
+    <a [routerLink]="['recipedetails', results.id]" class="btn btn-link ms-auto"
+      >View</a
+    >
+  </div>
+</div>
