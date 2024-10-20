@@ -6,12 +6,12 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class RecipesService {
-  apiUrl = environment.spoonacular.apiUrl;
+  apiUrl = environment.rapidApi.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   getFoodTrivia() {
-    const url = this.apiUrl + '/food/trivia/random';
+    const url = this.apiUrl + '/food/trivia/random'; 
     return this.http.get(url);
   }
 
@@ -22,6 +22,16 @@ export class RecipesService {
 
   getRecipeDetails(id: number) {
     const url = `${this.apiUrl}/recipes/${id}/information`;
+    return this.http.get(url);
+  }
+
+  getTasteDetails(id: number) {
+    const url = `${this.apiUrl}/recipes/${id}/tasteWidget.json`;
+    return this.http.get(url);
+  }
+
+  getEquipmentsDetails(id: number) {
+    const url = `${this.apiUrl}/recipes/${id}/equipmentWidget.json`;
     return this.http.get(url);
   }
 }

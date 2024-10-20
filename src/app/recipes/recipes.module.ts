@@ -8,6 +8,7 @@ import { RecipedetailsComponent } from './recipedetails/recipedetails.component'
 import { ReciperesultsComponent } from './reciperesults/reciperesults.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RecipesRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
   ],
 })
 export class RecipesModule {}

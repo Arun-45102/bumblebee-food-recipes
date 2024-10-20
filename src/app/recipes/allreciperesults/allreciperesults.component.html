@@ -2,13 +2,24 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="card mt-8">
-        <div class="card-body">
+        <div class="card-header d-flex justify-content-between">
+          <h5 class="card-title">
+            Showing all Results for
+            <span class="text-dark text-underline">{{
+              query | titlecase
+            }}</span>
+            ( {{ recipeItems.totalResults }} )
+          </h5>
+          <a routerLink="/recipes" class="btn btn-link">Go Back</a>
+        </div>
+        <div class="card-body pt-2">
           <table class="table">
             <thead>
               <tr>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Images</th>
+                <th>View Recipe</th>
               </tr>
             </thead>
             <tbody>
@@ -18,7 +29,7 @@
                 </td>
                 <td>
                   <a
-                    [routerLink]="['recipedetails', recipeItem.id]"
+                    [routerLink]="['../recipedetails', recipeItem.id]"
                     class="mb-0 text-dark"
                   >
                     {{ recipeItem.title }}
@@ -30,6 +41,13 @@
                     alt="{{ recipeItem.title }}"
                     width="50"
                   />
+                </td>
+                <td>
+                  <a
+                    [routerLink]="['../recipedetails', recipeItem.id]"
+                    class="btn btn-link ms-auto"
+                    >View</a
+                  >
                 </td>
               </tr>
             </tbody>
