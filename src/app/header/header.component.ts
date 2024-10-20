@@ -5,6 +5,9 @@ import { faBowlFood } from '@fortawesome/free-solid-svg-icons';
 import { faCarrot } from '@fortawesome/free-solid-svg-icons';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
+import { Observable } from 'rxjs';
+import firebase from 'firebase/compat/app';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,27 +20,25 @@ export class HeaderComponent {
   faCarrot = faCarrot;
   faCoffee = faCoffee;
 
+  user$!: Observable<firebase.User | null>;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe((loggedIn) => {
-      this.isLoggedIn = loggedIn;
+    this.user$ = this.authService.getAuthState();
+    this.user$.subscribe((result) => {
+      if (result) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
     });
-    if (localStorage.getItem('isLoggedIn') == 'true') {
-      this.isLoggedIn = true;
-    }
   }
 
   onLogOut() {
-    this.authService
-      .logout()
-      .then(() => {
-        localStorage.clear();
-        this.authService.setLogout();
-        this.router.navigate(['login']);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.authService.logout().then(() => {
+      this.isLoggedIn = false;
+      this.router.navigate(['login']);
+    });
   }
 }

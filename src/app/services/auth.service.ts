@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject } from 'rxjs';
+import firebase from 'firebase/compat/app';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedIn = new BehaviorSubject<boolean>(false);
+  user$!: Observable<firebase.User | null>;
 
-  isLoggedIn$ = this.isLoggedIn.asObservable();
-
-  constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {}
+  constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {
+    this.user$ = this.getAuthState();
+  }
 
   registerUser(email: string, password: string) {
     return this.auth.createUserWithEmailAndPassword(email, password);
@@ -23,6 +24,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       userName,
+      date: new Date(),
     };
     return userRef.set(userData, { merge: true });
   }
@@ -31,24 +33,11 @@ export class AuthService {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
-  setLogin() {
-    this.isLoggedIn.next(true);
-  }
-
   getAuthState() {
     return this.auth.authState;
   }
 
-  isAuthenticated(): boolean {
-    return this.isLoggedIn.getValue();
-  }
-
   logout() {
-    const status = this.auth.signOut();
-    return status;
-  }
-
-  setLogout() {
-    return this.isLoggedIn.next(false);
+    return this.auth.signOut();
   }
 }

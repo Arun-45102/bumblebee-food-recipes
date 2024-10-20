@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
+import { Observable } from 'rxjs';
+import firebase from 'firebase/compat/app';
+import { SharedService } from '../services/shared.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,12 +16,21 @@ import Swal from 'sweetalert2';
 export class RegisterComponent {
   progressBar: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  user$!: Observable<firebase.User | null>;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit() {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      this.router.navigate(['recipes']);
-    }
+    this.user$ = this.authService.getAuthState();
+    this.user$.subscribe((result) => {
+      if (result) {
+        this.router.navigate(['recipes']);
+      }
+    });
   }
 
   onRegister(registerForm: NgForm) {
@@ -35,24 +48,25 @@ export class RegisterComponent {
                 text: 'Registered Successfully',
                 icon: 'success',
               });
+              this.sharedService.notify(
+                'success',
+                'Good job!',
+                'Registered Successfully'
+              );
               this.progressBar = false;
             });
         })
         .catch((error) => {
           this.progressBar = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.message,
-          });
+          this.sharedService.notify('error', 'Oops...', error.message);
         });
     } else {
       this.progressBar = false;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill all the fields',
-      });
+      this.sharedService.notify(
+        'error',
+        'Oops...',
+        'Please fill all the fields'
+      );
     }
   }
 }
