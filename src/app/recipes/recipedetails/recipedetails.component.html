@@ -10,285 +10,470 @@
                 <a routerLink="/recipes">Recipes</a>
               </li>
               <li class="breadcrumb-item" routerLinkActive="active">
-                {{ recipeDetail.id }}
+                {{ recipeDetail.title }} ({{ recipeDetail.id }})
               </li>
             </ol>
           </nav>
-          <a class="btn btn-dark" routerLink="/recipes"> Go Back </a>
         </div>
-        <div class="card mt-2">
-          <div class="card-body">
-            <div class="d-flex justify-content-between mb-2">
-              <div class="header-details">
-                <h2 class="card-title text-dark mb-2">
-                  {{ recipeDetail.title }}
-                </h2>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Health Score - {{ recipeDetail.healthScore }}%
-                </h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Aggregate Likes - {{ recipeDetail.aggregateLikes }}
-                </h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Spoonacular Score -
-                  {{ recipeDetail.spoonacularScore | number : "1.0-1" }}
-                </h6>
-              </div>
-              <div class="image-container">
-                <img
-                  src="{{ recipeDetail.image }}"
-                  alt="{{ recipeDetail.title }}"
-                  class="img-fluid"
-                />
-              </div>
-            </div>
-            <hr class="border border-dark opacity-75" />
-            <div class="d-flex justify-content-around mt-3 mb-3">
-              <div class="group">
-                <div class="d-flex align-items-center">
-                  <ng-template
-                    *ngIf="recipeDetail.veryHealthy; then icon; else noIcon"
-                  >
-                  </ng-template>
-                  <h6>Very Healthy</h6>
-                </div>
-              </div>
-              <div class="group">
-                <div class="d-flex align-items-center">
-                  <ng-template
-                    *ngIf="recipeDetail.vegetarian; then icon; else noIcon"
-                  >
-                  </ng-template>
-                  <h6>Vegetarian</h6>
-                </div>
-              </div>
-              <div class="group">
-                <div class="d-flex align-items-center">
-                  <ng-template
-                    *ngIf="recipeDetail.vegan; then icon; else noIcon"
-                  >
-                  </ng-template>
-                  <h6>Vegan</h6>
-                </div>
-              </div>
-              <div class="group">
-                <div class="d-flex align-items-center">
-                  <ng-template
-                    *ngIf="recipeDetail.glutenFree; then icon; else noIcon"
-                  >
-                  </ng-template>
-                  <h6>Gluten Free</h6>
-                </div>
-              </div>
-              <div class="group">
-                <div class="d-flex align-items-center">
-                  <ng-template
-                    *ngIf="recipeDetail.dairyFree; then icon; else noIcon"
-                  >
-                  </ng-template>
-                  <h6>Dairy Free</h6>
-                </div>
-              </div>
-              <ng-template #icon>
-                <button
-                  class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
-                >
-                  <fa-icon [icon]="faCheck"></fa-icon>
-                </button>
-              </ng-template>
-              <ng-template #noIcon>
-                <button
-                  class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"
-                >
-                  <fa-icon [icon]="faXmark"></fa-icon>
-                </button>
-              </ng-template>
-            </div>
-            <hr class="border border-dark opacity-50" />
-            <div class="row mt-3 grids">
-              <div class="col-md-3">
-                <div class="card p-2 m-1">
-                  <div class="card-header">
-                    <h5 class="card-title">Cuisines</h5>
-                  </div>
-                  <div
-                    class="card-body"
-                    *ngIf="recipeDetail.cuisines?.length > 0; else noData"
-                  >
-                    <span
-                      class="badge badge-pill badge-lg bg-gradient-primary m-1"
-                      *ngFor="let cuisine of recipeDetail.cuisines"
-                      >{{ cuisine | titlecase }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card p-2">
-                  <div class="card-header">
-                    <h5 class="card-title">Dish Types</h5>
-                  </div>
-                  <div
-                    class="card-body"
-                    *ngIf="recipeDetail.dishTypes?.length > 0; else noData"
-                  >
-                    <span
-                      class="badge badge-pill badge-lg bg-gradient-primary m-1"
-                      *ngFor="let dish of recipeDetail.dishTypes"
-                      >{{ dish | titlecase }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card p-2">
-                  <div class="card-header">
-                    <h5 class="card-title">Diets</h5>
-                  </div>
-                  <div
-                    class="card-body"
-                    *ngIf="recipeDetail.diets?.length > 0; else noData"
-                  >
-                    <span
-                      class="badge badge-pill badge-lg bg-gradient-primary m-1"
-                      *ngFor="let diet of recipeDetail.diets"
-                      >{{ diet | titlecase }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card p-2">
-                  <div class="card-header">
-                    <h5 class="card-title">Occasions</h5>
-                  </div>
-                  <div
-                    class="card-body"
-                    *ngIf="recipeDetail.occasions?.length > 0; else noData"
-                  >
-                    <span
-                      class="badge badge-pill badge-lg bg-gradient-primary m-1"
-                      *ngFor="let occ of recipeDetail.occasions"
-                      >{{ occ | titlecase }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <ng-template #noData>
-                <p class="p-2 text-center">No Data Available</p>
-              </ng-template>
-            </div>
-            <hr class="border border-dark opacity-75" />
-            <div class="tastes mt-2 mb-2">
-              <div class="d-flex justify-content-around">
-                <h6>Sweet - {{ tasteDetails.sweetness }}%</h6>
-                <h6>Salt - {{ tasteDetails.saltiness }}%</h6>
-                <h6>Sour - {{ tasteDetails.sourness }}%</h6>
-                <h6>Bitter - {{ tasteDetails.bitterness }}%</h6>
-                <h6>Savor - {{ tasteDetails.savoriness }}%</h6>
-                <h6>Fat - {{ tasteDetails.fattiness }}%</h6>
-                <h6>Spice - {{ tasteDetails.spiciness }}%</h6>
-              </div>
-            </div>
-            <hr class="border border-dark opacity-75" />
-            <div class="row summary mt-3">
-              <div class="col-md-12">
-                <h4 class="text-dark">Summary</h4>
-                <div [innerHTML]="summary"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card mt-4">
-          <div class="card-body">
-            <h3 class="text-dark">Cooking Details</h3>
-            <div class="exIngredients mt-2 mb-2">
-              <h4 class="text-dark">Ingredients</h4>
-              <div class="row mt-1">
-                <div
-                  class="col-md-4"
-                  *ngFor="let ingredient of recipeDetail.extendedIngredients"
-                >
-                  <div class="card mt-2 mb-2">
-                    <div class="card-body">
-                      <h5 class="card-title mb-2 text-dark">
-                        {{ ingredient.nameClean | titlecase }}
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="d-flex flex-column h-100">
+                      <h5 class="font-weight-bolder">
+                        {{ recipeDetail.title }}
                       </h5>
-                      <div class="d-flex justify-content-between">
-                        <div class="details">
-                          <p>{{ ingredient.original | titlecase }}</p>
-                          <p>
-                            Consistency -
-                            <span class="text-dark">{{
-                              ingredient.consistency
-                            }}</span>
-                          </p>
-                          <p>
-                            Quantity - {{ ingredient.amount }}
-                            {{ ingredient.unit }}
-                          </p>
+                      <p class="mb-5">
+                        Health Score - {{ recipeDetail.healthScore }}%
+                      </p>
+                      <a
+                        class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
+                        href="javascript:;"
+                      >
+                        Spoonacular Score -
+                        {{ recipeDetail.spoonacularScore | number : "1.0-1" }}
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                    <div class="image-container h-100">
+                      <img
+                        src="{{ recipeDetail.image }}"
+                        class="img-fluid d-lg-block d-none"
+                        alt="{{ recipeDetail.title }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body text-lg-left text-center">
+                    <div
+                      class="d-flex justify-content-lg-start justify-content-center p-2"
+                    >
+                      <ng-template
+                        *ngIf="recipeDetail.veryHealthy; then icon; else noIcon"
+                      >
+                      </ng-template>
+                      <div>
+                        <span class="ps-3">Very Healthy</span>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-lg-start justify-content-center p-2"
+                    >
+                      <ng-template
+                        *ngIf="recipeDetail.vegetarian; then icon; else noIcon"
+                      >
+                      </ng-template>
+                      <div>
+                        <span class="ps-3">Vegetarian</span>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-lg-start justify-content-center p-2"
+                    >
+                      <ng-template
+                        *ngIf="recipeDetail.vegan; then icon; else noIcon"
+                      >
+                      </ng-template>
+                      <div>
+                        <span class="ps-3">Vegan</span>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-lg-start justify-content-center p-2"
+                    >
+                      <ng-template
+                        *ngIf="recipeDetail.glutenFree; then icon; else noIcon"
+                      >
+                      </ng-template>
+                      <div>
+                        <span class="ps-3">Gluten Free</span>
+                      </div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-lg-start justify-content-center p-2"
+                    >
+                      <ng-template
+                        *ngIf="recipeDetail.dairyFree; then icon; else noIcon"
+                      >
+                      </ng-template>
+                      <div>
+                        <span class="ps-3">Dairy Free</span>
+                      </div>
+                    </div>
+                    <ng-template #icon>
+                      <div
+                        class="icon icon-shape icon-xs rounded-circle bg-gradient-success shadow text-center text-white"
+                      >
+                        <fa-icon [icon]="faCheck" class="opacity-10"></fa-icon>
+                      </div>
+                    </ng-template>
+                    <ng-template #noIcon>
+                      <div
+                        class="icon icon-shape icon-xs rounded-circle bg-gradient-secondary shadow text-center text-white"
+                      >
+                        <fa-icon [icon]="faMinus"></fa-icon>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="card mt-5">
+                  <div class="card-body">
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Sweet</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.sweetness }}%</span
+                          >
                         </div>
-                        <div class="img">
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-primary"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.sweetness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.sweetness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Salt</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.saltiness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-secondary"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.saltiness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.saltiness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Sour</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.sourness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-info"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.sourness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.sourness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Bitter</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.bitterness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-success"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.bitterness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.bitterness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Savor</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.savoriness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-danger"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.savoriness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.savoriness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Fat</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.fattiness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-warning"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.fattiness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.fattiness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="progress-wrapper mt-3">
+                      <div class="progress-info">
+                        <div
+                          class="progress-percentage d-flex justify-content-between mb-2"
+                        >
+                          <span class="text-sm font-weight-bold">Spice</span>
+                          <span class="text-sm font-weight-bold"
+                            >{{ tasteDetails.spiciness }}%</span
+                          >
+                        </div>
+                      </div>
+                      <div class="progress">
+                        <div
+                          class="progress-bar bg-gradient-dark"
+                          role="progressbar"
+                          [attr.aria-valuenow]="tasteDetails.spiciness"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: tasteDetails.spiciness + '%' }"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card card-body pill-card p-3 mt-3">
+                      <h5 class="font-weight-bolder">Cuisines</h5>
+                      <div
+                        *ngIf="recipeDetail.cuisines?.length > 0; else noData"
+                      >
+                        <span
+                          class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                          *ngFor="let cuisine of recipeDetail.cuisines"
+                          >{{ cuisine | titlecase }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card card-body pill-card p-3 mt-3">
+                      <h5 class="font-weight-bolder">Dish Types</h5>
+                      <div
+                        *ngIf="recipeDetail.dishTypes?.length > 0; else noData"
+                      >
+                        <span
+                          class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                          *ngFor="let dish of recipeDetail.dishTypes"
+                          >{{ dish | titlecase }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card card-body pill-card p-3 mt-3">
+                      <h5 class="font-weight-bolder">Diets</h5>
+                      <div *ngIf="recipeDetail.diets?.length > 0; else noData">
+                        <span
+                          class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                          *ngFor="let diet of recipeDetail.diets"
+                          >{{ diet | titlecase }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card card-body pill-card p-3 mt-3">
+                      <h5 class="font-weight-bolder">Occasions</h5>
+                      <div
+                        *ngIf="recipeDetail.occasions?.length > 0; else noData"
+                      >
+                        <span
+                          class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                          *ngFor="let occ of recipeDetail.occasions"
+                          >{{ occ | titlecase }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #noData>
+                    <p class="p-2 text-center">No Data Available</p>
+                  </ng-template>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card card-body mt-4 p-3">
+                      <h5>Summary</h5>
+                      <div [innerHTML]="summary"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Ingredients</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li
+                        class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
+                        *ngFor="
+                          let ingredient of recipeDetail.extendedIngredients
+                        "
+                      >
+                        <div class="avatar me-3">
                           <img
                             src="https://img.spoonacular.com/ingredients_100x100/{{
                               ingredient.image
                             }}"
                             alt="{{ ingredient.original }}"
-                            class="img-fuild"
+                            class="border-radius-lg shadow"
                           />
                         </div>
-                      </div>
-                    </div>
+                        <div
+                          class="d-flex align-items-start flex-column justify-content-center"
+                        >
+                          <h6 class="mb-0 text-sm">
+                            {{ ingredient.nameClean | titlecase }}
+                          </h6>
+                          <p class="mb-0 text-xs">
+                            {{ ingredient.original | titlecase }} (Quantity -
+                            {{ ingredient.amount }} {{ ingredient.unit }})
+                          </p>
+                        </div>
+                        <a
+                          class="btn btn-link pe-3 ps-0 mb-0 ms-auto"
+                          (click)="getIngredientDetails(ingredient.id)"
+                          >View</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Equipments</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li
+                        class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
+                        *ngFor="let equipment of equipmentDetails.equipment"
+                      >
+                        <div class="avatar me-3">
+                          <img
+                            src="https://img.spoonacular.com/equipment_100x100/{{
+                              equipment.image
+                            }}"
+                            alt="{{ equipment.name }}"
+                            class="border-radius-lg shadow"
+                          />
+                        </div>
+                        <div
+                          class="d-flex align-items-start flex-column justify-content-center"
+                        >
+                          <h6 class="mb-0 text-sm">
+                            {{ equipment.name | titlecase }}
+                          </h6>
+                        </div>
+                        <a
+                          class="btn btn-link pe-3 ps-0 mb-0 ms-auto"
+                          href="javascript:;"
+                          >View</a
+                        >
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="equipment-details mt-1 mb-1">
-              <h4 class="text-dark">Equipments</h4>
-              <div class="row">
-                <div
-                  class="col-md-3"
-                  *ngFor="let equipment of equipmentDetails.equipment"
-                >
-                  <div class="card mt-1 mb-1">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <h5>{{ equipment.name | titlecase }}</h5>
-                        <img
-                          src="https://img.spoonacular.com/equipment_100x100/{{
-                            equipment.image
-                          }}"
-                          alt="{{ equipment.name }}"
-                          class="img-fluid"
-                        />
-                      </div>
-                    </div>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Instructions</h6>
+                  </div>
+                  <div class="card-body">
+                    <div [innerHTML]="instructions"></div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row instruction">
-              <div class="col-md-12">
-                <h4 class="text-dark">Instructions</h4>
-                <div [innerHTML]="instructions"></div>
-              </div>
-              <div class="col-md-12">
-                <h4 class="text-dark">Analyzed Instructions</h4>
-                <div
-                  class="ext-ins mt-2"
-                  *ngFor="let analyzedInstruction of analyzedInstructions"
-                >
-                  <div class="row">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Analyzed Instruction</h6>
+                  </div>
+                  <div class="card-body p-3">
                     <div
-                      class="col-md-6"
-                      *ngFor="let extIns of analyzedInstruction.steps"
+                      class="timeline timeline-one-side"
+                      *ngFor="let analyzedInstruction of analyzedInstructions"
                     >
-                      <div class="card mt-1 mb-1 step-card">
-                        <div class="card-body">
-                          <h5 class="card-title text-dark">
+                      <div
+                        class="timeline-block mb-3"
+                        *ngFor="let extIns of analyzedInstruction.steps"
+                      >
+                        <span class="timeline-step">
+                          <i
+                            class="ni ni-bell-55 text-success text-gradient"
+                          ></i>
+                        </span>
+                        <div class="timeline-content">
+                          <h6 class="text-dark text-sm font-weight-bold mb-0">
                             Step {{ extIns.number }}
-                          </h5>
-                          <p>{{ extIns.step }}</p>
+                          </h6>
+                          <p
+                            class="text-secondary font-weight-bold text-xs mt-1 mb-0"
+                          >
+                            {{ extIns.step }}
+                          </p>
                         </div>
                       </div>
                     </div>

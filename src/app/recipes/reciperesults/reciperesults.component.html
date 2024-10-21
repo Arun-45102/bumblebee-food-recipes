@@ -1,18 +1,37 @@
-<div class="mb-4 mt-2">
-  <div
-    class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3 p-2"
-    *ngFor="let results of searchResults.results"
-  >
-    <img
-      class="w-5 me-3 mb-0"
-      src="{{ results.image }}"
-      alt="{{ results.title }}"
-    />
-    <a [routerLink]="['recipedetails', results.id]" class="mb-0 text-dark">
-      {{ results.title }}
-    </a>
-    <a [routerLink]="['recipedetails', results.id]" class="btn btn-link ms-auto"
-      >View</a
+<div class="card card-blog card-plain mb-2 mt-3">
+  <div class="position-relative">
+    <a
+      (click)="goToRecipeDetails(searchResult.id)"
+      class="d-block shadow-xl border-radius-xl"
     >
+      <img
+        src="{{ searchResult.image }}"
+        alt="{{ searchResult.title }}"
+        class="img-fluid shadow border-radius-lg"
+      />
+    </a>
+  </div>
+  <div class="card-body px-1 pb-0">
+    <a
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="{{ searchResult.title }}"
+      (click)="goToRecipeDetails(searchResult.id)"
+    >
+      <h5>
+        {{
+          searchResult.title.length > 25
+            ? (searchResult.title | slice : 0 : 25) + "..."
+            : searchResult.title
+        }}
+      </h5>
+    </a>
+    <div class="d-flex align-items-center">
+      <a
+        (click)="goToRecipeDetails(searchResult.id)"
+        class="btn btn-sm btn-outline-primary mt-3"
+        >View Recipe</a
+      >
+    </div>
   </div>
 </div>

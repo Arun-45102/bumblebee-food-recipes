@@ -9,6 +9,8 @@ import { ReciperesultsComponent } from './reciperesults/reciperesults.component'
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    NgxPaginationModule,
   ],
 })
 export class RecipesModule {}

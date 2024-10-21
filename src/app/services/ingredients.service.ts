@@ -16,7 +16,12 @@ export class IngredientsService {
   }
 
   getIngredientDetails(id: number) {
-    const url = `${this.apiUrl}/food/ingredients/${id}/information`;
+    const url = `${this.apiUrl}/food/ingredients/${id}/information?amount=1`;
+    return this.http.get(url);
+  }
+
+  getIngredientSubstitute(id: number) {
+    const url = `${this.apiUrl}/food/ingredients/${id}/substitutes`;
     return this.http.get(url);
   }
 }

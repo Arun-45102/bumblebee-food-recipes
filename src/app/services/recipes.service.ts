@@ -11,7 +11,7 @@ export class RecipesService {
   constructor(private http: HttpClient) {}
 
   getFoodTrivia() {
-    const url = this.apiUrl + '/food/trivia/random'; 
+    const url = this.apiUrl + '/food/trivia/random';
     return this.http.get(url);
   }
 
@@ -32,6 +32,11 @@ export class RecipesService {
 
   getEquipmentsDetails(id: number) {
     const url = `${this.apiUrl}/recipes/${id}/equipmentWidget.json`;
+    return this.http.get(url);
+  }
+
+  getSimilarRecipe(id: number) {
+    const url = `${this.apiUrl}/recipes/${id}/similar?number=4`;
     return this.http.get(url);
   }
 }

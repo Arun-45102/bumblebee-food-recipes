@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
 export class RecipesComponent {
   searchQuery!: FormGroup;
   searchResults: any = {};
-  queryNumber: number = 10;
+  queryNumber: number = 12;
   results: boolean = false;
-  progressBars: boolean = false;
+  progressBar: boolean = false;
+  query: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -26,18 +27,18 @@ export class RecipesComponent {
   }
 
   getRecipe() {
-    this.progressBars = true;
+    this.progressBar = true;
+    this.query = this.searchQuery.value.searchValue;
     this.recipeService
       .getRecipeSearch(this.searchQuery.value.searchValue, this.queryNumber)
       .subscribe((data) => {
         this.searchResults = data;
         this.results = true;
-        this.progressBars = false;
+        this.progressBar = false;
       });
   }
 
   seeAllResults() {
-    console.log(this.searchQuery.value.searchValue);
     this.router.navigate(['recipes/allreciperesults'], {
       queryParams: {
         query: this.searchQuery.value.searchValue,

@@ -7,14 +7,17 @@ import { RecipesComponent } from './recipes.component';
 const routes: Routes = [
   {
     path: '',
+    title: 'Search Recipes',
     component: RecipesComponent,
   },
   {
     path: 'recipedetails/:id',
+    title: 'Recipe Details',
     component: RecipedetailsComponent,
   },
   {
     path: 'allreciperesults',
+    title: 'All Recipes',
     component: AllreciperesultsComponent,
   },
 ];

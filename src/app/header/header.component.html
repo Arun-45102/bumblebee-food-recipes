@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <nav
-        class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4"
+        class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4"
       >
         <div class="container-fluid">
           <a
@@ -41,15 +41,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-2" routerLink="/ingredients">
-                  <fa-icon
-                    [icon]="faCarrot"
-                    class="opacity-6 text-dark me-1"
-                  ></fa-icon>
-                  Ingredients
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link me-2" routerLink="/products">
                   <fa-icon
                     [icon]="faCoffee"
@@ -62,7 +53,7 @@
             <ul class="navbar-nav d-lg-flex d-none ms-auto">
               <li class="nav-item d-flex align-items-center">
                 <a
-                  class="btn btn-primary btn-sm mb-0 me-1"
+                  class="btn btn-round btn-sm mb-0 btn-outline-primary me-2"
                   routerLink="/login"
                   *ngIf="!isLoggedIn"
                   >Login</a
@@ -71,7 +62,7 @@
               <li class="nav-item">
                 <a
                   routerLink="/register"
-                  class="btn btn-sm mb-0 me-1 bg-gradient-dark"
+                  class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark"
                   *ngIf="!isLoggedIn"
                   >Register</a
                 >
@@ -79,7 +70,7 @@
               <li class="nav-item">
                 <a
                   (click)="onLogOut()"
-                  class="btn btn-sm mb-0 me-1 bg-gradient-dark"
+                  class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark"
                   *ngIf="isLoggedIn"
                   >Logout</a
                 >

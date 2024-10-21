@@ -1,57 +1,83 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <div class="card mt-8">
-        <div class="card-header d-flex justify-content-between">
-          <h5 class="card-title">
-            Showing all Results for
-            <span class="text-dark text-underline">{{
-              query | titlecase
-            }}</span>
-            ( {{ recipeItems.totalResults }} )
-          </h5>
-          <a routerLink="/recipes" class="btn btn-link">Go Back</a>
-        </div>
+    <div class="col-md-12">
+      <div class="card mt-8" *ngIf="results && !progressBar">
         <div class="card-body pt-2">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Images</th>
-                <th>View Recipe</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let recipeItem of recipeItems.results">
-                <td>
-                  {{ recipeItem.id }}
-                </td>
-                <td>
-                  <a
-                    [routerLink]="['../recipedetails', recipeItem.id]"
-                    class="mb-0 text-dark"
+          <p class="mt-3">
+            Showing all Results for
+            <span class="text-bold text-primary text-gradient"
+              >{{ query | titlecase }} ( top 100 of {{ searchResult.totalResults }} )</span
+            >
+          </p>
+          <div class="row">
+            <div
+              class="col-md-3"
+              *ngFor="
+                let recipeItem of searchResult.results | paginate : config
+              "
+            >
+              <app-reciperesults
+                [searchResult]="recipeItem"
+              ></app-reciperesults>
+            </div>
+          </div>
+          <div class="mt-4">
+            <pagination-template
+              #p="paginationApi"
+              [id]="config.id || 'default-id'"
+              (pageChange)="config.currentPage = $event"
+            >
+              <nav aria-label="Recipe Pagination">
+                <ul
+                  class="pagination pagination-primary justify-content-center"
+                >
+                  <li class="page-item" [class.disabled]="p.isFirstPage()">
+                    <a
+                      class="page-link"
+                      *ngIf="!p.isFirstPage()"
+                      (click)="p.previous()"
+                    >
+                      <fa-icon [icon]="faAngleLeft"></fa-icon>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li
+                    class="page-item"
+                    *ngFor="let page of p.pages"
+                    [class.active]="p.getCurrent() === page.value"
                   >
-                    {{ recipeItem.title }}
-                  </a>
-                </td>
-                <td>
-                  <img
-                    src="{{ recipeItem.image }}"
-                    alt="{{ recipeItem.title }}"
-                    width="50"
-                  />
-                </td>
-                <td>
-                  <a
-                    [routerLink]="['../recipedetails', recipeItem.id]"
-                    class="btn btn-link ms-auto"
-                    >View</a
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    <a
+                      class="page-link"
+                      (click)="p.setCurrent(page.value)"
+                      *ngIf="p.getCurrent() !== page.value"
+                      >{{ page.label }}</a
+                    >
+
+                    <a
+                      class="page-link"
+                      *ngIf="p.getCurrent() === page.value"
+                      >{{ page.label }}</a
+                    >
+                  </li>
+                  <li class="page-item" [class.disabled]="p.isLastPage()">
+                    <a
+                      class="page-link"
+                      *ngIf="!p.isLastPage()"
+                      (click)="p.next()"
+                    >
+                      <fa-icon [icon]="faAngleRight"></fa-icon>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </pagination-template>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="progressBar">
+        <div class="text-center mt-8">
+          <h4 class="text-primary text-gradient">Loading...</h4>
         </div>
       </div>
     </div>

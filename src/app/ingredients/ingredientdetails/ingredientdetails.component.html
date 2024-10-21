@@ -1,1 +1,161 @@
-<p>ingredientdetails works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-between mt-7">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item">
+              <a routerLink="/recipes">Recipes</a>
+            </li>
+            <li class="breadcrumb-item" routerLinkActive="active">
+              {{ ingredientDetail.name | titlecase }} ({{
+                ingredientDetail.id
+              }})
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="d-flex flex-column h-100">
+                    <h5 class="font-weight-bolder">
+                      {{ ingredientDetail.name | titlecase }}
+                    </h5>
+                    <p class="mb-1">
+                      Consistency -
+                      {{ ingredientDetail.consistency | uppercase }}
+                    </p>
+                    <p class="mb-5">Aisle - {{ ingredientDetail.aisle }}</p>
+                    <a
+                      class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
+                      href="javascript:;"
+                    >
+                      Estimated Cost -
+                      {{ ingredientDetail.estimatedCost.value }}
+                      {{ ingredientDetail.estimatedCost.unit }}
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                  <div class="image-container h-100">
+                    <img
+                      src="https://img.spoonacular.com/ingredients_250x250/{{
+                        ingredientDetail.image
+                      }}"
+                      class="img-fluid d-lg-block d-none"
+                      alt="{{ ingredientDetail.name }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Possible Units</h6>
+            </div>
+            <div class="card-body">
+              <div
+                *ngIf="ingredientDetail.possibleUnits?.length > 0; else noData"
+              >
+                <span
+                  class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                  *ngFor="let unit of ingredientDetail.possibleUnits"
+                  >{{ unit }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Shopping List Units</h6>
+            </div>
+            <div class="card-body">
+              <div
+                *ngIf="
+                  ingredientDetail.shoppingListUnits?.length > 0;
+                  else noData
+                "
+              >
+                <span
+                  class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                  *ngFor="let unit of ingredientDetail.shoppingListUnits"
+                  >{{ unit }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Meta's</h6>
+            </div>
+            <div class="card-body">
+              <div *ngIf="ingredientDetail.meta?.length > 0; else noData">
+                <span
+                  class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                  *ngFor="let unit of ingredientDetail.meta"
+                  >{{ unit }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Category Path</h6>
+            </div>
+            <div class="card-body">
+              <div
+                *ngIf="ingredientDetail.categoryPath?.length > 0; else noData"
+              >
+                <span
+                  class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                  *ngFor="let path of ingredientDetail.categoryPath"
+                  >{{ path }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noData>
+          <p class="p-2 text-center">No Data Available</p>
+        </ng-template>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 offset-md-2">
+          <div
+            class="card"
+          >
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0 text-center">{{ ingredientSubstitute.message }}</h6>
+            </div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let substitue of ingredientSubstitute.substitutes"
+                >
+                  {{ substitue }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

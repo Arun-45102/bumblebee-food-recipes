@@ -1,34 +1,9 @@
 .image-container {
-  img {
-    width: 200px;
-    height: 200px;
-  }
+  width: 250px;
+  height: 250px;
+  margin-left: auto;
 }
 
-.grids {
-  .card {
-    height: 300px;
-  }
-}
-
-.summary {
-  a {
-    color: #5e72e4 !important;
-  }
-}
-
-.clickhere {
-  text-decoration: underline;
-  color: #5e72e4 !important;
-}
-
-.step-card {
-  max-height: 250px;
-  overflow: auto;
-}
-
-.equipment-details {
-  .card {
-    height: 150px;
-  }
+.pill-card {
+  height: 200px;
 }
