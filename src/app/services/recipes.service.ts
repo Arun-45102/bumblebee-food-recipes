@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class RecipesService {
-  apiUrl = environment.rapidApi.apiUrl;
+  apiUrl = environment.spoonacular.apiUrl;
 
   constructor(private http: HttpClient) {}
 
