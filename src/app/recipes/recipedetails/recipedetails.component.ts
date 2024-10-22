@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-recipedetails',
@@ -18,7 +20,10 @@ export class RecipedetailsComponent {
   extendedInstruction: boolean = false;
   analyzedInstructions: any = [];
   equipmentDetails: any = {};
-  similarRecipe: any = [];
+  tasteArray: any = [];
+
+  wineParingName: string = '';
+  wineParingDescription: any = {};
 
   loading: boolean = false;
 
@@ -29,14 +34,14 @@ export class RecipedetailsComponent {
     private route: ActivatedRoute,
     private recipeService: RecipesService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
     this.loading = true;
     const id: any = this.route.snapshot.paramMap.get('id');
     this.recipeDetails(parseInt(id));
-    this.getTasteDetails(parseInt(id));
     this.getEquipmentsDetails(parseInt(id));
   }
 
@@ -54,13 +59,6 @@ export class RecipedetailsComponent {
     });
   }
 
-  getTasteDetails(id: number) {
-    this.recipeService.getTasteDetails(id).subscribe((data) => {
-      this.tasteDetails = data;
-      this.loading = false;
-    });
-  }
-
   getEquipmentsDetails(id: number) {
     this.recipeService.getEquipmentsDetails(id).subscribe((data) => {
       this.equipmentDetails = data;
@@ -70,5 +68,40 @@ export class RecipedetailsComponent {
 
   getIngredientDetails(id: number) {
     this.router.navigate(['ingredients/ingredientdetails/' + id]);
+  }
+
+  addDatatoPieChart() {
+    Object.entries(this.tasteDetails).forEach(([key, value]) => {
+      this.tasteArray.push(value);
+    });
+  }
+
+  getWineData(query: string) {
+    this.wineParingName = query.replace(/\s+/g, '_');
+    this.recipeService.getWineDescription(this.wineParingName).subscribe({
+      next: (data) => {
+        this.wineParingDescription = data;
+        if (this.wineParingDescription.status == 'failure') {
+          this.sharedService.notify(
+            'error',
+            query.toUpperCase(),
+            this.wineParingDescription.message
+          );
+        } else {
+          this.sharedService.notify(
+            'info',
+            query.toUpperCase(),
+            this.wineParingDescription.wineDescription
+          );
+        }
+      },
+      error: (error) => {
+        this.sharedService.notify(
+          'error',
+          query.toUpperCase(),
+          error.error.message
+        );
+      },
+    });
   }
 }

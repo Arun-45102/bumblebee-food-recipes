@@ -133,7 +133,7 @@
                         >
                           <span class="text-sm font-weight-bold">Sweet</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.sweetness }}%</span
+                            >{{ recipeDetail.taste?.sweetness }}%</span
                           >
                         </div>
                       </div>
@@ -141,10 +141,12 @@
                         <div
                           class="progress-bar bg-gradient-primary"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.sweetness"
+                          [attr.aria-valuenow]="recipeDetail.taste.sweetness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.sweetness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.sweetness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -155,7 +157,7 @@
                         >
                           <span class="text-sm font-weight-bold">Salt</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.saltiness }}%</span
+                            >{{ recipeDetail.taste.saltiness }}%</span
                           >
                         </div>
                       </div>
@@ -163,10 +165,12 @@
                         <div
                           class="progress-bar bg-gradient-secondary"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.saltiness"
+                          [attr.aria-valuenow]="recipeDetail.taste.saltiness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.saltiness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.saltiness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -177,7 +181,7 @@
                         >
                           <span class="text-sm font-weight-bold">Sour</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.sourness }}%</span
+                            >{{ recipeDetail.taste.sourness }}%</span
                           >
                         </div>
                       </div>
@@ -185,10 +189,12 @@
                         <div
                           class="progress-bar bg-gradient-info"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.sourness"
+                          [attr.aria-valuenow]="recipeDetail.taste.sourness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.sourness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.sourness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -199,7 +205,7 @@
                         >
                           <span class="text-sm font-weight-bold">Bitter</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.bitterness }}%</span
+                            >{{ recipeDetail.taste.bitterness }}%</span
                           >
                         </div>
                       </div>
@@ -207,10 +213,12 @@
                         <div
                           class="progress-bar bg-gradient-success"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.bitterness"
+                          [attr.aria-valuenow]="recipeDetail.taste.bitterness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.bitterness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.bitterness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -221,7 +229,7 @@
                         >
                           <span class="text-sm font-weight-bold">Savor</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.savoriness }}%</span
+                            >{{ recipeDetail.taste.savoriness }}%</span
                           >
                         </div>
                       </div>
@@ -229,10 +237,12 @@
                         <div
                           class="progress-bar bg-gradient-danger"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.savoriness"
+                          [attr.aria-valuenow]="recipeDetail.taste.savoriness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.savoriness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.savoriness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -243,7 +253,7 @@
                         >
                           <span class="text-sm font-weight-bold">Fat</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.fattiness }}%</span
+                            >{{ recipeDetail.taste.fattiness }}%</span
                           >
                         </div>
                       </div>
@@ -251,10 +261,12 @@
                         <div
                           class="progress-bar bg-gradient-warning"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.fattiness"
+                          [attr.aria-valuenow]="recipeDetail.taste.fattiness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.fattiness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.fattiness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -265,7 +277,7 @@
                         >
                           <span class="text-sm font-weight-bold">Spice</span>
                           <span class="text-sm font-weight-bold"
-                            >{{ tasteDetails.spiciness }}%</span
+                            >{{ recipeDetail.taste.spiciness }}%</span
                           >
                         </div>
                       </div>
@@ -273,10 +285,12 @@
                         <div
                           class="progress-bar bg-gradient-dark"
                           role="progressbar"
-                          [attr.aria-valuenow]="tasteDetails.spiciness"
+                          [attr.aria-valuenow]="recipeDetail.taste.spiciness"
                           aria-valuemin="0"
                           aria-valuemax="100"
-                          [ngStyle]="{ width: tasteDetails.spiciness + '%' }"
+                          [ngStyle]="{
+                            width: recipeDetail.taste.spiciness + '%'
+                          }"
                         ></div>
                       </div>
                     </div>
@@ -398,7 +412,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="card h-100">
+                <div class="card">
                   <div class="card-header pb-0 p-3">
                     <h6 class="mb-0">Equipments</h6>
                   </div>
@@ -424,13 +438,29 @@
                             {{ equipment.name | titlecase }}
                           </h6>
                         </div>
-                        <a
-                          class="btn btn-link pe-3 ps-0 mb-0 ms-auto"
-                          href="javascript:;"
-                          >View</a
-                        >
                       </li>
                     </ul>
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Wine Pairings</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="row mt-1">
+                      <div class="col-md-12">
+                        <p>{{ recipeDetail.winePairing.pairingText }}</p>
+                        <span
+                          class="badge badge-pill badge-lg bg-gradient-primary m-1"
+                          style="cursor: pointer"
+                          *ngFor="
+                            let wines of recipeDetail.winePairing.pairedWines
+                          "
+                          (click)="getWineData(wines)"
+                          >{{ wines }}</span
+                        >
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

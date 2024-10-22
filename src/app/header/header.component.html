@@ -27,7 +27,7 @@
             </span>
           </button>
           <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav mx-auto" *ngIf="isLoggedIn">
+            <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn">
               <li class="nav-item">
                 <a
                   class="nav-link d-flex align-items-center me-2 active"
@@ -38,15 +38,6 @@
                     class="opacity-6 text-dark me-1"
                   ></fa-icon>
                   Recipes
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link me-2" routerLink="/products">
-                  <fa-icon
-                    [icon]="faCoffee"
-                    class="opacity-6 text-dark me-1"
-                  ></fa-icon>
-                  Products
                 </a>
               </li>
             </ul>

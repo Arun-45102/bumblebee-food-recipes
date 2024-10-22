@@ -21,12 +21,7 @@ export class RecipesService {
   }
 
   getRecipeDetails(id: number) {
-    const url = `${this.apiUrl}/recipes/${id}/information`;
-    return this.http.get(url);
-  }
-
-  getTasteDetails(id: number) {
-    const url = `${this.apiUrl}/recipes/${id}/tasteWidget.json`;
+    const url = `${this.apiUrl}/recipes/${id}/information?addWinePairing=true&addTasteData=true`;
     return this.http.get(url);
   }
 
@@ -37,6 +32,11 @@ export class RecipesService {
 
   getSimilarRecipe(id: number) {
     const url = `${this.apiUrl}/recipes/${id}/similar?number=4`;
+    return this.http.get(url);
+  }
+
+  getWineDescription(query: string) {
+    const url = `${this.apiUrl}/food/wine/description?wine=${query}`;
     return this.http.get(url);
   }
 }

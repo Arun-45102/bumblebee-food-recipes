@@ -1,6 +1,6 @@
 export const environment = {
-  useRapidApi: false,
-  useSpoonacularApi: true,
+  useRapidApi: true,
+  useSpoonacularApi: false,
   rapidApi: {
     apiUrl: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
     nutritionApiHost: 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
